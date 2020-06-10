@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.scss">
+    <title>Dawid Miczek</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <div class="navigation__link navigation__link--logo">DAWID<br>MICZEk</div>
+            <div class="burger">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </div>
+            <div class="navigation__link navigation__link--github">GITHUB</div>
+            <div class="navigation__link navigation__link--cv">CV</div>
+        </nav>
+        <div class="carousel">
+            <div class="queue-slide queue-slide--top">GRA<br/>SAPER</div>
+            <div class="active-slide">
+                <div class="active-slide__text active-slide__text--outline">AKTRADE<br/>WIZYTÓWKA</div>
+                <div class="active-slide__image-wrapper">
+                    <img class="active-slide__image" alt="Aktywny slajd" src="assets/hero.jpg"/>
+                </div>
+                <div class="active-slide__text active-slide__text--title">AKTRADE<br/>WIZYTÓWKA</div>
+            </div>
+            <div class="queue-slide queue-slide--bot">ZADANIA<br>DOMOWE</div>
+            <div class="slide-count">
+                <span class="slide-count__current-slide">01</span>
+                /
+                <span class="slice-count__no-slides">04</span>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
