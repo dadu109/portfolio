@@ -8,14 +8,25 @@ body{
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  ::-moz-selection {
+    color:#fff;
+    background: rgb(233, 138, 21);
+  }
+
+  ::selection {
+    color:#fff;
+    background: rgb(233, 138, 21);
+  }
 }
 
 .container{
   width:100vw;
   height:100vh;
+  overflow: hidden;
   position: relative;
   background: rgba(0, 52, 49, 0.7);
   &::after{
+    z-index: 0;
     content:'';
     position: absolute;
     top:0;
@@ -37,6 +48,11 @@ body{
     line-height: 16px;
     letter-spacing: 0.22em;
     font-weight: bold;
+    z-index: 200;
+    @media (min-width:800px) {
+      font-size: 18px;
+      line-height: 21px;
+    }
 
     &--logo{
       top:12%;
@@ -59,6 +75,10 @@ body{
   position: absolute;
   top:12%;
   right:10%;
+  z-index: 200;
+  @media (min-width:800px) {
+    display:none;
+  }
 
   &__line{
     display: inline-block;
@@ -73,9 +93,70 @@ body{
   }
 }
 
+.burger-menu{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100vw;
+  height:100vh;
+  background: rgba(233, 138, 21);
+  z-index: 100;
+  transform: translateX(100%);
+  @media (min-width:800px){
+    display:none;
+  }
+
+  &::after{
+    z-index: 0;
+    content:'';
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: url('assets/noise.gif');
+    opacity: 0.1;
+  }
+
+  &__link{
+    position: absolute;
+    top:30%;
+    left:10%;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    &:nth-child(2){
+      top:40%;
+    }
+  }
+}
+
+.navigation__desktop{
+  display:none;
+  position: absolute;
+  top:12%;
+  right:10%;
+  text-align: right;
+
+  @media (min-width:800px) {
+    .navigation__link{
+      position: unset;
+      margin-bottom: 17px;
+      &:last-child{
+        margin:0;
+      }
+    }
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    white-space: nowrap;
+  }
+}
+
 .carousel{
   position: relative;
-  z-index: 0;
+  z-index: 1;
   top:0;
   left:0;
   width:100vw;
@@ -85,18 +166,33 @@ body{
   .queue-slide{
     position:absolute;
     font-weight: 900;
-    font-size: 30px;
-    line-height: 35px;
+    font-size: 9vw;
+    line-height: 9.2vw;
     color: transparent;
     -webkit-text-stroke: 1px #fff;
     opacity: 0.3;
     left:13%;
+    @media (min-width:480px) {
+      font-size: 8vw;
+      left:20%;
+    }
+    @media (min-width:800px) {
+      left:27%;
+      font-size: 6vw;
+      line-height: 100%;
+    }
 
     &--top{
       top:-3%;
+      @media (min-width:800px) {
+        top:-9%;
+      }
     }
     &--bot{
       bottom: -3%;
+      @media (min-width:800px) {
+        bottom:-9%;
+      }
     }
   }
 
@@ -106,13 +202,23 @@ body{
     &__text{
       position: absolute;
       font-weight: 900;
-      font-size: 36px;
-      line-height: 42px;
+      font-size: 10vw;
+      line-height: 100%;
       -webkit-text-stroke: .5px #fff;
       letter-spacing: 0.065em;
       left:10%;
       top:35%;
       z-index: 1;
+      transform: translate(0,0);
+      @media (min-width:480px) {
+        font-size: 8vw;
+        left:20%;
+      }
+      @media (min-width:800px) {
+        top:35%;
+        left:26%;
+        font-size: 6.5vw;
+      }
 
       &--outline{
         color:transparent;
@@ -126,6 +232,23 @@ body{
       top:30%;
       left:27%;
       width:100%;
+      max-width: 400px;
+      //@media (min-width:672px) {
+      //  max-width: 60%;
+      //}
+      @media (min-width:800px) {
+        left:35%;
+        top:30%;
+        max-width: 45%;
+      }
+      @media (min-width:950px) {
+        max-width: 40%;
+      }
+      @media (min-width:1550px) {
+        left:45%;
+        top:25%;
+        max-width: 35%;
+      }
 
       &::before{
         content:'';
@@ -147,11 +270,16 @@ body{
   }
   .slide-count{
     position:absolute;
-    bottom:24%;
+    bottom:23%;
     right:10%;
     color:#fff;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 0.22em;
+
+    @media (min-width:800px) {
+      left:26%;
+      top:69%
+    }
 
     &__current-slide{
       font-size: 36px;
