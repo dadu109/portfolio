@@ -2,12 +2,19 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: unset;
+  cursor: none;
+}
+
 body {
   margin: 0;
   padding: 0;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: none;
 }
 body ::-moz-selection {
   color: #fff;
@@ -16,6 +23,35 @@ body ::-moz-selection {
 body ::selection {
   color: #fff;
   background: #e98a15;
+}
+
+#cursor {
+  z-index: 1000;
+  position: absolute;
+  background-color: #fff;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+#cursor-follower {
+  z-index: 1000;
+  position: absolute;
+  border: solid 2px #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: height 0.2s ease-in, width 0.2s ease-in, background 0.2s ease-in, opacity 0.2s ease-in;
+}
+#cursor-follower.follower-hover {
+  opacity: 0.5;
+  background-color: #fff;
+  width: 60px;
+  height: 60px;
 }
 
 .container {

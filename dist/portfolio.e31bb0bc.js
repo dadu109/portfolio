@@ -118,6 +118,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"index.js":[function(require,module,exports) {
+var cursor = document.querySelector('#cursor');
+var cursorFollower = document.querySelector('#cursor-follower');
 var burger = document.querySelector('.burger');
 var burgerLines = burger.querySelectorAll('.burger__line');
 var introAnimation = gsap.timeline();
@@ -125,6 +127,34 @@ var burgerAnimation = gsap.timeline({
   paused: true
 });
 var burgerOpen = false;
+var mouseX = 0,
+    mouseY = 0;
+var fxp = 0,
+    fyp = 0;
+var cxp = 0,
+    cyp = 0;
+document.addEventListener('mousemove', function (e) {
+  if (e.target.classList.contains('hover')) {
+    cursorFollower.classList.add('follower-hover');
+  } else {
+    cursorFollower.classList.remove('follower-hover');
+  }
+
+  mouseX = e.pageX;
+  mouseY = e.pageY;
+});
+setInterval(function () {
+  fxp += (mouseX - fxp) / 6;
+  fyp += (mouseY - fyp) / 6;
+  cursorFollower.style.left = fxp + 'px';
+  cursorFollower.style.top = fyp + 'px';
+}, 17);
+setInterval(function () {
+  cxp += (mouseX - cxp) / 6;
+  cyp += (mouseY - cyp) / 6;
+  cursor.style.left = cxp + 'px';
+  cursor.style.top = cyp + 'px';
+}, 1);
 introAnimation.fromTo(document.querySelector('.navigation__link--github'), {
   x: -500
 }, {
@@ -205,7 +235,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50285" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55403" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
