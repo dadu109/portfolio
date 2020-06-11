@@ -52,6 +52,12 @@ introAnimation
         '-=.3'
     )
     .fromTo(
+        document.querySelector('.navigation__desktop'),
+        {x:500},
+        {duration: .3,x:0},
+        '-=.3'
+    )
+    .fromTo(
         document.querySelector('.navigation__link--logo'),
         {x:-500},
         {duration: .3,x:0},
@@ -63,7 +69,7 @@ burgerAnimation
     .fromTo(
         document.querySelector('.burger-menu'),
         {
-            duration: .3,
+            duration: .2,
             skewType: "simple",
             skewX: -10,
             x:'120%',

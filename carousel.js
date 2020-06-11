@@ -1,7 +1,7 @@
 const projects = [
-    {name: 'AKTRADE<br>WIZYTÓWKA', imgSrc: 'hero.jpg'},
-    {name: 'ZADANIA<br>DOMOWE', imgSrc: 'hero.jpg'},
-    {name: 'GRA<br>SAPER', imgSrc: 'saper.png'},
+    {name: 'AKTRADE<br>WIZYTÓWKA', imgSrc: 'hero.jpg',href:'/wizytowka.html'},
+    {name: 'ZADANIA<br>DOMOWE', imgSrc: 'hero.jpg',href:'/wizytowka.html'},
+    {name: 'GRA<br>SAPER', imgSrc: 'saper.png',href:'/wizytowka.html'},
 ];
 
 const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,next,array}) => {
@@ -16,8 +16,10 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
         slide.innerHTML = (activeSlide+1)<10?`0${activeSlide+1}`:activeSlide+1;
         noSlides.innerHTML = array.length<10?`0${array.length}`:array.length;
         img.src = array[activeSlide].imgSrc;
+        imgWrapper.href = array[activeSlide].href;
         name.innerHTML = array[activeSlide].name;
         outline.innerHTML = array[activeSlide].name;
+        outline.href = array[activeSlide].href;
         prev.innerHTML=array[activeSlide-1]?array[activeSlide-1].name:array[array.length-1].name;
         next.innerHTML=array[activeSlide+1]?array[activeSlide+1].name:array[0].name
     };

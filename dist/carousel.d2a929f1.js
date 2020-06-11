@@ -120,13 +120,16 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"carousel.js":[function(require,module,exports) {
 var projects = [{
   name: 'AKTRADE<br>WIZYTÓWKA',
-  imgSrc: 'hero.jpg'
+  imgSrc: 'hero.jpg',
+  href: '/wizytowka.html'
 }, {
   name: 'ZADANIA<br>DOMOWE',
-  imgSrc: 'hero.jpg'
+  imgSrc: 'hero.jpg',
+  href: '/wizytowka.html'
 }, {
   name: 'GRA<br>SAPER',
-  imgSrc: 'saper.png'
+  imgSrc: 'saper.png',
+  href: '/wizytowka.html'
 }];
 
 var carousel = function carousel(_ref) {
@@ -152,8 +155,10 @@ var carousel = function carousel(_ref) {
     slide.innerHTML = activeSlide + 1 < 10 ? "0".concat(activeSlide + 1) : activeSlide + 1;
     noSlides.innerHTML = array.length < 10 ? "0".concat(array.length) : array.length;
     img.src = array[activeSlide].imgSrc;
+    imgWrapper.href = array[activeSlide].href;
     name.innerHTML = array[activeSlide].name;
     outline.innerHTML = array[activeSlide].name;
+    outline.href = array[activeSlide].href;
     prev.innerHTML = array[activeSlide - 1] ? array[activeSlide - 1].name : array[array.length - 1].name;
     next.innerHTML = array[activeSlide + 1] ? array[activeSlide + 1].name : array[0].name;
   };
@@ -347,7 +352,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55403" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57733" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

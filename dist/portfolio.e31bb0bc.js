@@ -171,6 +171,11 @@ introAnimation.fromTo(document.querySelector('.navigation__link--github'), {
 }, {
   duration: .3,
   x: 0
+}, '-=.3').fromTo(document.querySelector('.navigation__desktop'), {
+  x: 500
+}, {
+  duration: .3,
+  x: 0
 }, '-=.3').fromTo(document.querySelector('.navigation__link--logo'), {
   x: -500
 }, {
@@ -178,7 +183,7 @@ introAnimation.fromTo(document.querySelector('.navigation__link--github'), {
   x: 0
 }, '-=.3');
 burgerAnimation.fromTo(document.querySelector('.burger-menu'), {
-  duration: .3,
+  duration: .2,
   skewType: "simple",
   skewX: -10,
   x: '120%',
@@ -235,7 +240,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55403" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57733" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
