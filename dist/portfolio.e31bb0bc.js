@@ -139,10 +139,10 @@ var carousel = function carousel(_ref) {
   var activeSlide = 0;
   var touchstartY = 0;
   var touchendY = 0;
-  var switchTlUp = gsap.timeline();
-  var switchTlDown = gsap.timeline({
+  var switchTlUp = gsap.timeline({
     paused: true
   });
+  var switchTlDown = gsap.timeline();
 
   var update = function update() {
     slide.innerHTML = activeSlide + 1 < 10 ? "0".concat(activeSlide + 1) : activeSlide + 1;
@@ -370,7 +370,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55406" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59866" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
