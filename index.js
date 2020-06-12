@@ -1,4 +1,5 @@
 const cursor = document.querySelector('#cursor');
+const logo = document.querySelector('.navigation__link--logo');
 const cursorFollower = document.querySelector('#cursor-follower');
 const burger = document.querySelector('.burger');
 const burgerLines = burger.querySelectorAll('.burger__line');
@@ -76,7 +77,8 @@ burgerAnimation
             ease: "circ.inOut"
         },
         {skewX: 0,x:0}
-    ).to(
+    )
+    .to(
         burgerLines[0],
     {
             duration: .2,
@@ -104,8 +106,10 @@ burger.addEventListener('click',()=>{
    if(!burgerOpen){
        burgerOpen = true;
        burgerAnimation.play();
+       logo.style.position = 'fixed';
    }else{
        burgerOpen = false;
        burgerAnimation.reverse();
+       logo.style.position = 'absolute';
    }
 });

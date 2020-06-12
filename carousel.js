@@ -24,10 +24,11 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
         next.innerHTML=array[activeSlide+1]?array[activeSlide+1].name:array[0].name
     };
 
-    update();
+
 
 
     switchTlDown
+        .call(()=>{update()})
         .to(imgWrapper,0.3,{ease: "circ.out",opacity:0,x:'10%',skewType: "simple",skewX: -10})
         .fromTo(next,{y:-500},{ease: "circ.out",duration: .3,y:0},'-=.3')
         .fromTo(name,{y:-500},{ease: "circ.out",duration: .3,y:0}, '-=.3')
@@ -36,6 +37,7 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
         .to(imgWrapper,0.2,{ease: "circ.out",delay:.5,opacity:1,x:0,skewType: "simple",skewX: 0});
 
     switchTlUp
+        .call(()=>{update()})
         .to(imgWrapper,0.3,{ease: "circ.out",opacity:0,x:'10%',skewType: "simple",skewX: -10})
         .fromTo(next,{y:500},{ease: "circ.out",duration: .3,y:0},'-=.3')
         .fromTo(name,{y:500},{ease: "circ.out",duration: .3,y:0}, '-=.3')
@@ -62,7 +64,6 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
                 activeSlide=0;
             }
         };
-        update();
     });
     container.addEventListener('touchstart', function(event) {
         touchstartY = event.changedTouches[0].screenY;
@@ -87,7 +88,6 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
                 activeSlide=array.length-1;
             }
         }
-        update();
     }, false);
 
     prev.addEventListener('click',()=>{

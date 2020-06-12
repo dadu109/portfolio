@@ -163,8 +163,9 @@ var carousel = function carousel(_ref) {
     next.innerHTML = array[activeSlide + 1] ? array[activeSlide + 1].name : array[0].name;
   };
 
-  update();
-  switchTlDown.to(imgWrapper, 0.3, {
+  switchTlDown.call(function () {
+    update();
+  }).to(imgWrapper, 0.3, {
     ease: "circ.out",
     opacity: 0,
     x: '10%',
@@ -202,7 +203,9 @@ var carousel = function carousel(_ref) {
     skewType: "simple",
     skewX: 0
   });
-  switchTlUp.to(imgWrapper, 0.3, {
+  switchTlUp.call(function () {
+    update();
+  }).to(imgWrapper, 0.3, {
     ease: "circ.out",
     opacity: 0,
     x: '10%',
@@ -260,7 +263,6 @@ var carousel = function carousel(_ref) {
     }
 
     ;
-    update();
   });
   container.addEventListener('touchstart', function (event) {
     touchstartY = event.changedTouches[0].screenY;
@@ -285,8 +287,6 @@ var carousel = function carousel(_ref) {
         activeSlide = array.length - 1;
       }
     }
-
-    update();
   }, false);
   prev.addEventListener('click', function () {
     if (activeSlide !== 0) {
@@ -352,7 +352,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57733" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54175" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
