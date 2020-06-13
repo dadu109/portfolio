@@ -55,6 +55,7 @@ body{
           opacity .2s ease-in;
   ;
   &.follower-hover{
+    cursor: none !important;
     opacity: .5;
     background-color: #fff;
     width: 60px;
