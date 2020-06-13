@@ -561,6 +561,7 @@ body ::selection {
   margin-bottom: 0;
 }
 .content .section__icon {
+  font-size: 50px;
   width: 50px;
   color: #fff;
   margin-right: 40px;
@@ -619,6 +620,7 @@ body ::selection {
   margin-bottom: 70px;
 }
 .form__input {
+  outline: none;
   width: 60vw;
   background: none;
   border: none;

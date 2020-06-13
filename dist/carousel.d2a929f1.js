@@ -119,17 +119,21 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"carousel.js":[function(require,module,exports) {
 var projects = [{
+  name: 'ORGANIZER<br>ZADAŃ',
+  imgSrc: 'zadania.png',
+  href: '/zadania.html'
+}, {
   name: 'AKTRADE<br>WIZYTÓWKA',
   imgSrc: 'hero.jpg',
   href: '/wizytowka.html'
 }, {
-  name: 'ZADANIA<br>DOMOWE',
-  imgSrc: 'hero.jpg',
-  href: '/wizytowka.html'
+  name: 'MONT-UP<br>WIZYTÓWKA',
+  imgSrc: 'montup.png',
+  href: '/montup.html'
 }, {
   name: 'GRA<br>SAPER',
   imgSrc: 'saper.png',
-  href: '/wizytowka.html'
+  href: '/saper.html'
 }];
 
 var carousel = function carousel(_ref) {
@@ -150,6 +154,9 @@ var carousel = function carousel(_ref) {
     paused: true
   });
   var switchTlDown = gsap.timeline();
+  var activeHover = gsap.timeline({
+    paused: true
+  });
 
   var update = function update() {
     slide.innerHTML = activeSlide + 1 < 10 ? "0".concat(activeSlide + 1) : activeSlide + 1;
@@ -163,6 +170,17 @@ var carousel = function carousel(_ref) {
     next.innerHTML = array[activeSlide + 1] ? array[activeSlide + 1].name : array[0].name;
   };
 
+  activeHover.to(next, .3, {
+    y: '50vh'
+  }).to(prev, .3, {
+    y: '-50vh'
+  }, '-=.3').to(imgWrapper, .3, {
+    scale: 1.2
+  }, '-=.3').to(outline, .3, {
+    scale: 1.2
+  }, '-=.3').to(name, .3, {
+    scale: 1.2
+  }, '-=.3');
   switchTlDown.call(function () {
     update();
   }).to(imgWrapper, 0.3, {
@@ -288,6 +306,26 @@ var carousel = function carousel(_ref) {
       }
     }
   }, false);
+  outline.addEventListener('mouseenter', function () {
+    if (activeHover.progress() === 0) {
+      activeHover.play(0);
+    }
+  });
+  outline.addEventListener('mouseleave', function () {
+    if (activeHover.progress() === 1) {
+      activeHover.reverse();
+    }
+  });
+  imgWrapper.addEventListener('mouseenter', function () {
+    if (activeHover.progress() === 0) {
+      activeHover.play(0);
+    }
+  });
+  imgWrapper.addEventListener('mouseleave', function () {
+    if (activeHover.progress() === 1) {
+      activeHover.reverse();
+    }
+  });
   prev.addEventListener('click', function () {
     if (activeSlide !== 0) {
       switchTlDown.play(0);

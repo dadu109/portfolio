@@ -1,7 +1,8 @@
 const projects = [
+    {name: 'ORGANIZER<br>ZADAŃ', imgSrc: 'zadania.png',href:'/zadania.html'},
     {name: 'AKTRADE<br>WIZYTÓWKA', imgSrc: 'hero.jpg',href:'/wizytowka.html'},
-    {name: 'ZADANIA<br>DOMOWE', imgSrc: 'hero.jpg',href:'/wizytowka.html'},
-    {name: 'GRA<br>SAPER', imgSrc: 'saper.png',href:'/wizytowka.html'},
+    {name: 'MONT-UP<br>WIZYTÓWKA', imgSrc: 'montup.png',href:'/montup.html'},
+    {name: 'GRA<br>SAPER', imgSrc: 'saper.png',href:'/saper.html'},
 ];
 
 const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,next,array}) => {
@@ -11,6 +12,7 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
     let touchendY = 0;
     const switchTlUp = gsap.timeline({paused:true});
     const switchTlDown = gsap.timeline();
+    const activeHover = gsap.timeline({paused:true});
 
     const update = () => {
         slide.innerHTML = (activeSlide+1)<10?`0${activeSlide+1}`:activeSlide+1;
@@ -25,7 +27,12 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
     };
 
 
-
+    activeHover
+        .to(next,.3,{y:'50vh'})
+        .to(prev,.3,{y:'-50vh'},'-=.3')
+        .to(imgWrapper,.3,{scale:1.2},'-=.3')
+        .to(outline,.3,{scale:1.2},'-=.3')
+        .to(name,.3,{scale:1.2},'-=.3');
 
     switchTlDown
         .call(()=>{update()})
@@ -89,6 +96,30 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
             }
         }
     }, false);
+
+    outline.addEventListener('mouseenter',()=>{
+        if(activeHover.progress() === 0){
+            activeHover.play(0)
+        }
+    });
+
+    outline.addEventListener('mouseleave',()=>{
+        if(activeHover.progress() === 1){
+            activeHover.reverse();
+        }
+    });
+
+    imgWrapper.addEventListener('mouseenter',()=>{
+        if(activeHover.progress() === 0){
+            activeHover.play(0)
+        }
+    });
+
+    imgWrapper.addEventListener('mouseleave',()=>{
+        if(activeHover.progress() === 1){
+            activeHover.reverse();
+        }
+    });
 
     prev.addEventListener('click',()=>{
         if(activeSlide!==0){

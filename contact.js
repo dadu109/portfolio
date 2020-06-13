@@ -9,7 +9,7 @@ emailInput.addEventListener('blur',e=>{
         emailWrapper.classList.add('form__input-wrapper--error');
 
     }else{
-        emailError.classList.remove('emailError--visible')
+        emailError.classList.remove('emailError--visible');
         emailWrapper.classList.remove('form__input-wrapper--error');
     }
 });
@@ -18,5 +18,3 @@ emailInput.addEventListener('focus',e=>{
     emailError.classList.remove('emailError--visible');
     emailWrapper.classList.remove('form__input-wrapper--error');
 });
-
-console.log(process.env.API);

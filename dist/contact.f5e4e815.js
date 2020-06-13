@@ -135,7 +135,6 @@ emailInput.addEventListener('focus', function (e) {
   emailError.classList.remove('emailError--visible');
   emailWrapper.classList.remove('form__input-wrapper--error');
 });
-console.log(undefined);
 },{}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
