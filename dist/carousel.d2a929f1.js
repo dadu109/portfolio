@@ -147,6 +147,7 @@ var carousel = function carousel(_ref) {
       prev = _ref.prev,
       next = _ref.next,
       array = _ref.array;
+  var ableToScroll = true;
   var activeSlide = 0;
   var touchstartY = 0;
   var touchendY = 0;
@@ -161,13 +162,20 @@ var carousel = function carousel(_ref) {
   var update = function update() {
     slide.innerHTML = activeSlide + 1 < 10 ? "0".concat(activeSlide + 1) : activeSlide + 1;
     noSlides.innerHTML = array.length < 10 ? "0".concat(array.length) : array.length;
-    img.src = array[activeSlide].imgSrc;
     imgWrapper.href = array[activeSlide].href;
     name.innerHTML = array[activeSlide].name;
     outline.innerHTML = array[activeSlide].name;
     outline.href = array[activeSlide].href;
     prev.innerHTML = array[activeSlide - 1] ? array[activeSlide - 1].name : array[array.length - 1].name;
     next.innerHTML = array[activeSlide + 1] ? array[activeSlide + 1].name : array[0].name;
+    ableToScroll = false;
+    window.setTimeout(function () {
+      ableToScroll = true;
+    }, 300);
+  };
+
+  var updateImg = function updateImg() {
+    img.src = array[activeSlide].imgSrc;
   };
 
   activeHover.to(next, .3, {
@@ -175,11 +183,11 @@ var carousel = function carousel(_ref) {
   }).to(prev, .3, {
     y: '-50vh'
   }, '-=.3').to(imgWrapper, .3, {
-    scale: 1.2
+    scale: 1.15
   }, '-=.3').to(outline, .3, {
-    scale: 1.2
+    scale: 1.15
   }, '-=.3').to(name, .3, {
-    scale: 1.2
+    scale: 1.15
   }, '-=.3');
   switchTlDown.call(function () {
     update();
@@ -189,6 +197,8 @@ var carousel = function carousel(_ref) {
     x: '10%',
     skewType: "simple",
     skewX: -10
+  }).call(function () {
+    updateImg();
   }).fromTo(next, {
     y: -500
   }, {
@@ -229,6 +239,8 @@ var carousel = function carousel(_ref) {
     x: '10%',
     skewType: "simple",
     skewX: -10
+  }).call(function () {
+    updateImg();
   }).fromTo(next, {
     y: 500
   }, {
@@ -262,25 +274,27 @@ var carousel = function carousel(_ref) {
     skewX: 0
   });
   container.addEventListener('wheel', function (e) {
-    if (e.deltaY < 0) {
-      if (activeSlide !== 0) {
-        switchTlDown.play(0);
-        activeSlide--;
+    if (ableToScroll) {
+      if (e.deltaY < 0) {
+        if (activeSlide !== 0) {
+          switchTlDown.play(0);
+          activeSlide--;
+        } else {
+          switchTlDown.play(0);
+          activeSlide = array.length - 1;
+        }
       } else {
-        switchTlDown.play(0);
-        activeSlide = array.length - 1;
+        if (activeSlide !== array.length - 1) {
+          switchTlUp.play(0);
+          activeSlide++;
+        } else {
+          switchTlUp.play(0);
+          activeSlide = 0;
+        }
       }
-    } else {
-      if (activeSlide !== array.length - 1) {
-        switchTlUp.play(0);
-        activeSlide++;
-      } else {
-        switchTlUp.play(0);
-        activeSlide = 0;
-      }
-    }
 
-    ;
+      ;
+    }
   });
   container.addEventListener('touchstart', function (event) {
     touchstartY = event.changedTouches[0].screenY;
@@ -288,21 +302,23 @@ var carousel = function carousel(_ref) {
   container.addEventListener('touchend', function (event) {
     touchendY = event.changedTouches[0].screenY;
 
-    if (touchendY < touchstartY) {
-      if (activeSlide !== array.length - 1) {
-        switchTlUp.play(0);
-        activeSlide++;
-      } else {
-        switchTlUp.play(0);
-        activeSlide = 0;
-      }
-    } else if (touchendY > touchstartY) {
-      if (activeSlide !== 0) {
-        switchTlDown.play(0);
-        activeSlide--;
-      } else {
-        switchTlDown.play(0);
-        activeSlide = array.length - 1;
+    if (ableToScroll) {
+      if (touchendY < touchstartY) {
+        if (activeSlide !== array.length - 1) {
+          switchTlUp.play(0);
+          activeSlide++;
+        } else {
+          switchTlUp.play(0);
+          activeSlide = 0;
+        }
+      } else if (touchendY > touchstartY) {
+        if (activeSlide !== 0) {
+          switchTlDown.play(0);
+          activeSlide--;
+        } else {
+          switchTlDown.play(0);
+          activeSlide = array.length - 1;
+        }
       }
     }
   }, false);
@@ -390,7 +406,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64222" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57508" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

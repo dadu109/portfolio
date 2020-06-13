@@ -6,7 +6,7 @@ const projects = [
 ];
 
 const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,next,array}) => {
-
+    let ableToScroll = true;
     let activeSlide = 0;
     let touchstartY = 0;
     let touchendY = 0;
@@ -17,26 +17,30 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
     const update = () => {
         slide.innerHTML = (activeSlide+1)<10?`0${activeSlide+1}`:activeSlide+1;
         noSlides.innerHTML = array.length<10?`0${array.length}`:array.length;
-        img.src = array[activeSlide].imgSrc;
         imgWrapper.href = array[activeSlide].href;
         name.innerHTML = array[activeSlide].name;
         outline.innerHTML = array[activeSlide].name;
         outline.href = array[activeSlide].href;
         prev.innerHTML=array[activeSlide-1]?array[activeSlide-1].name:array[array.length-1].name;
         next.innerHTML=array[activeSlide+1]?array[activeSlide+1].name:array[0].name
+        ableToScroll = false;
+        window.setTimeout(()=>{ableToScroll=true},300)
     };
-
+    const updateImg = () => {
+        img.src = array[activeSlide].imgSrc;
+    };
 
     activeHover
         .to(next,.3,{y:'50vh'})
         .to(prev,.3,{y:'-50vh'},'-=.3')
-        .to(imgWrapper,.3,{scale:1.2},'-=.3')
-        .to(outline,.3,{scale:1.2},'-=.3')
-        .to(name,.3,{scale:1.2},'-=.3');
+        .to(imgWrapper,.3,{scale:1.15},'-=.3')
+        .to(outline,.3,{scale:1.15},'-=.3')
+        .to(name,.3,{scale:1.15},'-=.3');
 
     switchTlDown
         .call(()=>{update()})
         .to(imgWrapper,0.3,{ease: "circ.out",opacity:0,x:'10%',skewType: "simple",skewX: -10})
+        .call(()=>{updateImg()})
         .fromTo(next,{y:-500},{ease: "circ.out",duration: .3,y:0},'-=.3')
         .fromTo(name,{y:-500},{ease: "circ.out",duration: .3,y:0}, '-=.3')
         .fromTo(outline,{y:-500},{ease: "circ.out",duration: .3,y:0}, '-=.3')
@@ -46,6 +50,7 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
     switchTlUp
         .call(()=>{update()})
         .to(imgWrapper,0.3,{ease: "circ.out",opacity:0,x:'10%',skewType: "simple",skewX: -10})
+        .call(()=>{updateImg()})
         .fromTo(next,{y:500},{ease: "circ.out",duration: .3,y:0},'-=.3')
         .fromTo(name,{y:500},{ease: "circ.out",duration: .3,y:0}, '-=.3')
         .fromTo(outline,{y:500},{ease: "circ.out",duration: .3,y:0}, '-=.3')
@@ -54,23 +59,25 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
 
 
     container.addEventListener('wheel',(e)=>{
-        if(e.deltaY<0){
-            if(activeSlide!==0){
-                switchTlDown.play(0);
-                activeSlide--
+        if(ableToScroll){
+            if(e.deltaY<0){
+                if(activeSlide!==0){
+                    switchTlDown.play(0);
+                    activeSlide--
+                }else{
+                    switchTlDown.play(0);
+                    activeSlide=array.length-1;
+                }
             }else{
-                switchTlDown.play(0);
-                activeSlide=array.length-1;
-            }
-        }else{
-            if(activeSlide!==array.length-1){
-                switchTlUp.play(0);
-                activeSlide++
-            }else{
-                switchTlUp.play(0);
-                activeSlide=0;
-            }
-        };
+                if(activeSlide!==array.length-1){
+                    switchTlUp.play(0);
+                    activeSlide++
+                }else{
+                    switchTlUp.play(0);
+                    activeSlide=0;
+                }
+            };
+        }
     });
     container.addEventListener('touchstart', function(event) {
         touchstartY = event.changedTouches[0].screenY;
@@ -78,21 +85,23 @@ const carousel = ({container,noSlides,slide,img,imgWrapper,outline,name,prev,nex
 
     container.addEventListener('touchend', function(event) {
         touchendY = event.changedTouches[0].screenY;
-        if (touchendY < touchstartY) {
-            if(activeSlide!==array.length-1){
-                switchTlUp.play(0);
-                activeSlide++
-            }else{
-                switchTlUp.play(0);
-                activeSlide=0;
-            }
-        }else if (touchendY > touchstartY) {
-            if(activeSlide!==0){
-                switchTlDown.play(0);
-                activeSlide--
-            }else{
-                switchTlDown.play(0);
-                activeSlide=array.length-1;
+        if(ableToScroll){
+            if (touchendY < touchstartY) {
+                if(activeSlide!==array.length-1){
+                    switchTlUp.play(0);
+                    activeSlide++
+                }else{
+                    switchTlUp.play(0);
+                    activeSlide=0;
+                }
+            }else if (touchendY > touchstartY) {
+                if(activeSlide!==0){
+                    switchTlDown.play(0);
+                    activeSlide--
+                }else{
+                    switchTlDown.play(0);
+                    activeSlide=array.length-1;
+                }
             }
         }
     }, false);
