@@ -124,6 +124,16 @@ body{
       bottom:13%;
       right:10%;
     }
+
+    &--email{
+      bottom:27%;
+      left:50%;
+      transform: translateX(-50%);
+      @media (min-width:800px) {
+        bottom:13%;
+      }
+    }
+
     &--omnie{
       top:60vh;
       @media (min-width:800px) {
@@ -521,6 +531,145 @@ body{
       font-weight: bold;
       font-size: 18px;
       color: #FFFFFF;
+
+      &--technologies{
+        display:flex;
+        flex-direction: column;
+      }
+    }
+    &__technology{
+      display: flex;
+      align-items: center;
+      margin-bottom: 2em;
+      &:last-child{
+        margin-bottom:0;
+      }
+    }
+    &__icon{
+      width:50px;
+      color:#fff;
+      margin-right: 40px;
+    }
+    &__name{
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.2em
+    }
+  }
+}
+.kontakt-bg{
+  pointer-events: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  position:absolute;
+  z-index: 2;
+  bottom:0;
+  left:50%;
+  transform-origin: center;
+  transform:translate(-50%,-140%) rotate(-90deg) ;
+  color:transparent;
+  -webkit-text-stroke: 3px #fff;
+  opacity: .1;
+  font-size: calc(150vh / 7);
+  @media (min-width:800px) {
+    font-size: calc(155vw / 7);
+    transform: rotate(0) translateY(-50%) ;
+    left:0;
+    top:50%;
+  }
+}
+.form{
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__input-wrapper{
+    position: relative;
+    margin-bottom: 45px;
+    @media (min-width:800px) {
+      margin-bottom:10vh;
+    }
+    &--error{
+      margin-bottom: 70px;
+    }
+  }
+  &__input{
+    width:60vw;
+    background: none;
+    border:none;
+    font-size: 18px;
+    border-bottom: 3px solid #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    color:#fff;
+    &::placeholder{
+      visibility: hidden;
+    }
+    &:not(:placeholder-shown) + .form__label{
+      transform: translateY(-22px);
+      font-size: 14px;
+      @media (min-width:800px) {
+        transform: translateY(-42px);
+        font-size: 25px;
+      }
+    }
+    &:focus + .form__label{
+      transform: translateY(-22px);
+      font-size: 14px;
+      @media (min-width:800px) {
+        transform: translateY(-42px);
+        font-size: 25px;
+      }
+    }
+
+    @media (min-width:800px) {
+      width:30vw;
+      font-size: 36px;
+    }
+  }
+  .emailError{
+    position: absolute;
+    display: none;
+    font-size: 14px;
+    padding:10px 0;
+    color:rgb(233, 138, 21);
+    @media (min-width:800px) {
+      font-size: 20px;
+    }
+
+    &--visible{
+      display: block;
+    }
+  }
+  &__label{
+    position:absolute;
+    top:-5px;
+    left:0;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.065em;
+    color:#fff;
+    transition: font-size .2s ease-in-out, transform .2s ease-in-out;
+    @media (min-width:800px) {
+      font-size: 36px;
+    }
+  }
+  &__button{
+    border:none;
+    background: none;
+    font-weight: 900;
+    font-size: 36px;
+    letter-spacing: 0.065em;
+    color:#fff;
+    margin-bottom: 45px;
+    @media (min-width:800px) {
+      margin-bottom:10vh;
+      font-size: 48px;
     }
   }
 }

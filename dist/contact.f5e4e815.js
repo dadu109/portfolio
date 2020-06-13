@@ -117,109 +117,25 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"index.js":[function(require,module,exports) {
-var cursor = document.querySelector('#cursor');
-var logo = document.querySelector('.navigation__link--logo');
-var cursorFollower = document.querySelector('#cursor-follower');
-var burger = document.querySelector('.burger');
-var burgerLines = burger.querySelectorAll('.burger__line');
-var introAnimation = gsap.timeline();
-var burgerAnimation = gsap.timeline({
-  paused: true
-});
-var burgerOpen = false;
-var mouseX = 0,
-    mouseY = 0;
-var fxp = 0,
-    fyp = 0;
-var cxp = 0,
-    cyp = 0;
-document.addEventListener('mousemove', function (e) {
-  if (e.target.classList.contains('hover')) {
-    cursorFollower.classList.add('follower-hover');
+})({"contact.js":[function(require,module,exports) {
+var emailInput = document.querySelector('#email');
+var emailWrapper = document.querySelector('.form__input-wrapper--email');
+var emailError = document.querySelector('.emailError');
+var emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+emailInput.addEventListener('blur', function (e) {
+  if (!emailRegex.test(e.target.value)) {
+    emailError.classList.add('emailError--visible');
+    emailWrapper.classList.add('form__input-wrapper--error');
   } else {
-    cursorFollower.classList.remove('follower-hover');
-  }
-
-  mouseX = e.pageX;
-  mouseY = e.pageY;
-});
-setInterval(function () {
-  fxp += (mouseX - fxp) / 6;
-  fyp += (mouseY - fyp) / 6;
-  cursorFollower.style.left = fxp + 'px';
-  cursorFollower.style.top = fyp + 'px';
-}, 17);
-setInterval(function () {
-  cxp += (mouseX - cxp) / 6;
-  cyp += (mouseY - cyp) / 6;
-  cursor.style.left = cxp + 'px';
-  cursor.style.top = cyp + 'px';
-}, 1);
-introAnimation.fromTo(document.querySelector('.navigation__link--github'), {
-  x: -500
-}, {
-  delay: .5,
-  duration: .3,
-  x: 0
-}).fromTo(document.querySelector('.navigation__link--cv'), {
-  x: 500
-}, {
-  duration: .3,
-  x: 0
-}, '-=.3').fromTo(document.querySelector('.navigation__link--email'), {
-  y: 500
-}, {
-  duration: .3,
-  y: 0
-}, '-=.3').fromTo(burger, {
-  x: 500
-}, {
-  duration: .3,
-  x: 0
-}, '-=.3').fromTo(document.querySelector('.navigation__desktop'), {
-  x: 500
-}, {
-  duration: .3,
-  x: 0
-}, '-=.3').fromTo(document.querySelector('.navigation__link--logo'), {
-  x: -500
-}, {
-  duration: .3,
-  x: 0
-}, '-=.3');
-burgerAnimation.fromTo(document.querySelector('.burger-menu'), {
-  duration: .2,
-  skewType: "simple",
-  skewX: -10,
-  x: '120%',
-  ease: "circ.inOut"
-}, {
-  skewX: 0,
-  x: 0
-}).to(burgerLines[0], {
-  duration: .2,
-  x: 18,
-  rotate: 45
-}, '-=.3').to(burgerLines[1], {
-  duration: .2,
-  scale: 0.2
-}, '-=.3').to(burgerLines[2], {
-  duration: .2,
-  x: -18,
-  rotate: -45
-}, '-=.3');
-burger.addEventListener('click', function () {
-  if (!burgerOpen) {
-    burgerOpen = true;
-    burgerAnimation.play();
-    logo.style.position = 'fixed';
-  } else {
-    burgerOpen = false;
-    burgerAnimation.reverse();
-    logo.style.position = 'absolute';
+    emailError.classList.remove('emailError--visible');
+    emailWrapper.classList.remove('form__input-wrapper--error');
   }
 });
+emailInput.addEventListener('focus', function (e) {
+  emailError.classList.remove('emailError--visible');
+  emailWrapper.classList.remove('form__input-wrapper--error');
+});
+console.log(undefined);
 },{}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -424,5 +340,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/portfolio.e31bb0bc.js.map
+},{}]},{},["node_modules/parcel/src/builtins/hmr-runtime.js","contact.js"], null)
+//# sourceMappingURL=/contact.f5e4e815.js.map

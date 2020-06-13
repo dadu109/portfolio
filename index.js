@@ -47,6 +47,12 @@ introAnimation
         '-=.3'
     )
     .fromTo(
+        document.querySelector('.navigation__link--email'),
+        {y:500},
+        {duration: .3,y:0},
+        '-=.3'
+    )
+    .fromTo(
         burger,
         {x:500},
         {duration: .3,x:0},
