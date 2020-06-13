@@ -701,4 +701,23 @@ body ::selection {
   }
 }
 
+.contact-success-message {
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 900;
+  font-size: 36px;
+  letter-spacing: 0.065em;
+  margin-bottom: 45px;
+}
+@media (min-width: 800px) {
+  .contact-success-message {
+    margin-bottom: 10vh;
+    font-size: 48px;
+  }
+}
+
 /*# sourceMappingURL=/style.97fcb138.css.map */
