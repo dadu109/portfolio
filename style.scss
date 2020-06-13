@@ -615,7 +615,7 @@ body{
       transform: translateY(-22px);
       font-size: 14px;
       @media (min-width:800px) {
-        transform: translateY(-42px);
+        transform: translateY(-32px);
         font-size: 25px;
       }
     }
@@ -623,7 +623,7 @@ body{
       transform: translateY(-22px);
       font-size: 14px;
       @media (min-width:800px) {
-        transform: translateY(-42px);
+        transform: translateY(-32px);
         font-size: 25px;
       }
     }
@@ -640,7 +640,7 @@ body{
     padding:10px 0;
     color:rgb(233, 138, 21);
     @media (min-width:800px) {
-      font-size: 20px;
+      font-size: 18px;
     }
 
     &--visible{
@@ -662,6 +662,7 @@ body{
   }
   &__button{
     border:none;
+    cursor:none;
     background: none;
     font-weight: 900;
     font-size: 36px;

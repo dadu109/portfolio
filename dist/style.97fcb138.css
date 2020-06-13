@@ -636,7 +636,7 @@ body ::selection {
 }
 @media (min-width: 800px) {
   .form__input:not(:placeholder-shown) + .form__label {
-    transform: translateY(-42px);
+    transform: translateY(-32px);
     font-size: 25px;
   }
 }
@@ -646,7 +646,7 @@ body ::selection {
 }
 @media (min-width: 800px) {
   .form__input:focus + .form__label {
-    transform: translateY(-42px);
+    transform: translateY(-32px);
     font-size: 25px;
   }
 }
@@ -665,7 +665,7 @@ body ::selection {
 }
 @media (min-width: 800px) {
   .form .emailError {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 .form .emailError--visible {
@@ -688,6 +688,7 @@ body ::selection {
 }
 .form__button {
   border: none;
+  cursor: none;
   background: none;
   font-weight: 900;
   font-size: 36px;
