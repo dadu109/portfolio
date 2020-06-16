@@ -118,23 +118,43 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/contact.js":[function(require,module,exports) {
-var emailInput = document.querySelector('#email');
-var emailWrapper = document.querySelector('.form__input-wrapper--email');
-var emailError = document.querySelector('.emailError');
-var emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
-emailInput.addEventListener('blur', function (e) {
-  if (!emailRegex.test(e.target.value)) {
-    emailError.classList.add('emailError--visible');
-    emailWrapper.classList.add('form__input-wrapper--error');
-  } else {
+//Used IIFE so that variables couldn't be changed by user
+(function () {
+  var contactForm = document.querySelector('.form--contact');
+  var emailInput = document.querySelector('#email');
+  var emailWrapper = document.querySelector('.form__input-wrapper--email');
+  var emailError = document.querySelector('.emailError');
+  var submitButton = document.querySelector('.form__button--submit');
+  var emailValid = false;
+
+  var validateEmail = function validateEmail(text) {
+    var emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+    return emailRegex.test(text);
+  };
+
+  emailInput.addEventListener('change', function (_ref) {
+    var target = _ref.target;
+    emailValid = validateEmail(target.value);
+  });
+  emailInput.addEventListener('blur', function (e) {
+    if (!emailValid) {
+      emailError.classList.add('emailError--visible');
+      emailWrapper.classList.add('form__input-wrapper--error');
+    } else {
+      emailError.classList.remove('emailError--visible');
+      emailWrapper.classList.remove('form__input-wrapper--error');
+    }
+  });
+  emailInput.addEventListener('focus', function (e) {
     emailError.classList.remove('emailError--visible');
     emailWrapper.classList.remove('form__input-wrapper--error');
-  }
-});
-emailInput.addEventListener('focus', function (e) {
-  emailError.classList.remove('emailError--visible');
-  emailWrapper.classList.remove('form__input-wrapper--error');
-});
+  });
+  submitButton.addEventListener('click', function () {
+    if (emailValid) {
+      contactForm.submit();
+    }
+  });
+})();
 },{}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -163,7 +183,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54267" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58361" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
