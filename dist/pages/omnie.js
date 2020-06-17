@@ -117,110 +117,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/index.js":[function(require,module,exports) {
-var cursor = document.querySelector('#cursor');
-var logo = document.querySelector('.navigation__link--logo');
-var cursorFollower = document.querySelector('#cursor-follower');
-var burger = document.querySelector('.burger');
-var burgerLines = burger.querySelectorAll('.burger__line');
-var introAnimation = gsap.timeline();
-var burgerAnimation = gsap.timeline({
-  paused: true
-});
-var burgerOpen = false;
-var mouseX = 0,
-    mouseY = 0;
-var fxp = 0,
-    fyp = 0;
-var cxp = 0,
-    cyp = 0;
-document.addEventListener('mousemove', function (e) {
-  if (e.target.classList.contains('hover')) {
-    cursorFollower.classList.add('follower-hover');
-  } else {
-    cursorFollower.classList.remove('follower-hover');
+})({"node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  mouseX = e.pageX;
-  mouseY = e.pageY;
-});
-setInterval(function () {
-  fxp += (mouseX - fxp) / 6;
-  fyp += (mouseY - fyp) / 6;
-  cursorFollower.style.left = fxp + 'px';
-  cursorFollower.style.top = fyp + 'px';
-}, 17);
-setInterval(function () {
-  cxp += (mouseX - cxp) / 6;
-  cyp += (mouseY - cyp) / 6;
-  cursor.style.left = cxp + 'px';
-  cursor.style.top = cyp + 'px';
-}, 1);
-introAnimation.fromTo(document.querySelector('.navigation__link--github'), {
-  x: -500
-}, {
-  delay: .5,
-  duration: .3,
-  x: 0
-}).fromTo(document.querySelector('.navigation__link--cv'), {
-  x: 500
-}, {
-  duration: .3,
-  x: 0
-}, '-=.3').fromTo(document.querySelector('.navigation__link--email'), {
-  y: 500
-}, {
-  duration: .3,
-  y: 0
-}, '-=.3').fromTo(burger, {
-  x: 500
-}, {
-  duration: .3,
-  x: 0
-}, '-=.3').fromTo(document.querySelector('.navigation__desktop'), {
-  x: 500
-}, {
-  duration: .3,
-  x: 0
-}, '-=.3').fromTo(document.querySelector('.navigation__link--logo'), {
-  x: -500
-}, {
-  duration: .3,
-  x: 0
-}, '-=.3');
-burgerAnimation.fromTo(document.querySelector('.burger-menu'), {
-  duration: .2,
-  skewType: "simple",
-  skewX: -10,
-  x: '120%',
-  ease: "circ.inOut"
-}, {
-  skewX: 0,
-  x: 0
-}).to(burgerLines[0], {
-  duration: .2,
-  x: 18,
-  rotate: 45
-}, '-=.3').to(burgerLines[1], {
-  duration: .2,
-  scale: 0.2
-}, '-=.3').to(burgerLines[2], {
-  duration: .2,
-  x: -18,
-  rotate: -45
-}, '-=.3');
-burger.addEventListener('click', function () {
-  if (!burgerOpen) {
-    burgerOpen = true;
-    burgerAnimation.play();
-    logo.style.position = 'fixed';
-  } else {
-    burgerOpen = false;
-    burgerAnimation.reverse();
-    logo.style.position = 'absolute';
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
   }
-});
-},{}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel/src/builtins/bundle-url.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -424,5 +388,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel/src/builtins/hmr-runtime.js","js/index.js"], null)
-//# sourceMappingURL=/js.00a46daa.js.map
+},{}]},{},["node_modules/parcel/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/pages/omnie.js.map
